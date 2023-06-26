@@ -39,7 +39,7 @@ class WikiDocument(models.Model):
     owner = models.ForeignKey('auth.User', related_name='owned_objects', on_delete=models.CASCADE)
     version = models.IntegerField(default=0)
 
-    related_documents = models.ManyToManyField('self', related_name='related_documents')
+    related_documents = models.ManyToManyField('self', blank=True)
     document_type = models.CharField(max_length=255, choices=DocumentType.choices)
 
     created_at = models.DateTimeField(auto_now_add=True)
