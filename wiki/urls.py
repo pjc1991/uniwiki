@@ -5,3 +5,7 @@ from .views import UniverseViewSet, WikiDocsViewSet
 router = routers.DefaultRouter()
 router.register(r'universes', UniverseViewSet)
 router.register(r'wikidocs', WikiDocsViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
