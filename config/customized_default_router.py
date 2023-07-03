@@ -11,4 +11,3 @@ class DefaultRouter(routers.DefaultRouter):
         Extend the routes with url routes from another router.
         """
         self.registry.extend(router.registry)
-        self.urls.extend(router.urls)
