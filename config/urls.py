@@ -17,16 +17,18 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from config import views
 
-from config.customized_default_router import DefaultRouter
-from common.urls import router as common_router
-from wiki.urls import router as wiki_router
-
-router = DefaultRouter()
-router.extend(common_router)
-router.extend(wiki_router)
+api_patterns = [
+    path('common/', include('common.urls')),
+    path('wiki/', include('wiki.urls')),
+    path('auth/', include('rest_framework.urls')),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(api_patterns)),
+
+    # API root view
+    path('', views.api_root, name='api-root'),
 ]
