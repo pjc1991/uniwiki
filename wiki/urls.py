@@ -10,16 +10,18 @@ router = routers.DefaultRouter()
 router.register(r'universe', UniverseViewSet)
 router.register(r'wikidoc', WikiDocsViewSet)
 
+app_name = 'wiki'
+
 
 @api_view(['GET'])
-def api_root(request, format=None):
+def api_root(request, fmt=None):
     return Response({
-        'universe': reverse('universe-list', request=request, format=format),
-        'wikidoc': reverse('wikidoc-list', request=request, format=format),
+        'universe': reverse('universe-list', request=request, format=fmt),
+        'wikidoc': reverse('wikidoc-list', request=request, format=fmt),
     })
 
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', api_root, name='wiki-api-root'),
+    path('', api_root, name='api-root'),
 ]

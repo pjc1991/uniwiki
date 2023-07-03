@@ -2,10 +2,21 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='common:group-detail')
+    users = serializers.HyperlinkedRelatedField(many=True, view_name='common:user-detail', read_only=True)
+
+    class Meta:
+        model = Group
+        fields = ['name', 'url', 'users']
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    groups = GroupSerializer(many=True, read_only=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'groups', 'password']
+        fields = ['id', 'username', 'email', 'password', 'groups']
         extra_kwargs = {'password': {'write_only': True, 'required': True}}
 
     def create(self, validated_data):
@@ -17,9 +28,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']

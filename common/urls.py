@@ -8,12 +8,15 @@ from common import views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
+router.register(r'group', views.GroupViewSet)
+
+app_name = 'common'
 
 
 @api_view(['GET'])
-def api_root(request, format=None):
+def api_root(request, fmt=None):
     return Response({
-        'user': reverse('user-list', request=request, format=format),
+        'user': reverse('user-list', request=request, format=fmt),
     })
 
 
