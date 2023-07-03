@@ -8,7 +8,7 @@ from .views import UniverseViewSet, WikiDocsViewSet
 
 router = routers.DefaultRouter()
 router.register(r'universe', UniverseViewSet)
-router.register(r'wikidoc', WikiDocsViewSet)
+router.register(r'wikidocs', WikiDocsViewSet)
 
 app_name = 'wiki'
 
@@ -17,7 +17,6 @@ app_name = 'wiki'
 def api_root(request, fmt=None):
     return Response({
         'universe': reverse('universe-list', request=request, format=fmt),
-        'wikidoc': reverse('wikidoc-list', request=request, format=fmt),
     })
 
 

@@ -14,7 +14,7 @@ class Universe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey('auth.User', related_name='owned_universes', on_delete=models.CASCADE)
-    allowed_users = models.ManyToManyField('auth.User', related_name='allowed_universes')
+    allowed_users = models.ManyToManyField('auth.User', related_name='allowed_universes', blank=False)
 
     def __str__(self):
         return self.name
