@@ -42,10 +42,10 @@ class WikiDocument(models.Model):
     description = models.TextField()
     universe = models.ForeignKey(Universe, on_delete=models.CASCADE, blank=False)
     owner = models.ForeignKey('auth.User', related_name='owned_objects', on_delete=models.CASCADE, blank=False)
-    version = models.IntegerField(default=0)
+    version = models.IntegerField(default=0, null=False)
 
     related_documents = models.ManyToManyField('self', blank=True)
-    document_type = models.CharField(max_length=255, choices=DocumentType.choices)
+    document_type = models.CharField(max_length=255, choices=DocumentType.choices, null=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

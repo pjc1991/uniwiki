@@ -6,7 +6,7 @@ from wiki.models import Universe, WikiDocument
 
 class WikiDocsSerializer(serializers.HyperlinkedModelSerializer):
     universe = serializers.HyperlinkedRelatedField(view_name='wiki:universe-detail', queryset=Universe.objects.all())
-    owner = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
+    owner = serializers.HyperlinkedRelatedField(view_name='common:user-detail', queryset=User.objects.all())
     related_documents = serializers.HyperlinkedRelatedField(view_name='wiki:wikidocs-detail',
                                                             queryset=WikiDocument.objects.all(), many=True)
     document_type = serializers.ChoiceField(choices=WikiDocument.DocumentType.choices)

@@ -17,6 +17,7 @@ app_name = 'common'
 def api_root(request, fmt=None):
     return Response({
         'user': reverse('user-list', request=request, format=fmt),
+        'group': reverse('group-list', request=request, format=fmt),
     })
 
 
