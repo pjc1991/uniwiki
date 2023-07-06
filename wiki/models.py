@@ -9,6 +9,7 @@ class Universe(models.Model):
     A universe is a collection of Objects, which can be edited by allowed users.
     """
 
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -27,16 +28,20 @@ class WikiDocument(models.Model):
     """
 
     class DocumentType(models.TextChoices):
+        """
+        The type of the Wiki document.
+        """
         CHARACTER = 'CHARACTER', 'Character'
         PLOT = 'PLOT', 'Plot'
         SETTING = 'SETTING', 'Setting'
         ITEM = 'ITEM', 'Item'
         OTHER = 'OTHER', 'Other'
 
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    universe = models.ForeignKey(Universe, on_delete=models.CASCADE)
-    owner = models.ForeignKey('auth.User', related_name='owned_objects', on_delete=models.CASCADE)
+    universe = models.ForeignKey(Universe, on_delete=models.CASCADE, blank=False)
+    owner = models.ForeignKey('auth.User', related_name='owned_objects', on_delete=models.CASCADE, blank=False)
     version = models.IntegerField(default=0)
 
     related_documents = models.ManyToManyField('self', blank=True)

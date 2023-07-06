@@ -6,8 +6,6 @@ from .serializers import UniverseSerializer, WikiDocsSerializer
 
 
 class UniverseViewSet(viewsets.ModelViewSet):
-    # only show the universes that the user has access to
-    # many-to-many relationship
 
     queryset = Universe.objects.all()
     serializer_class = UniverseSerializer
@@ -22,7 +20,7 @@ class UniverseViewSet(viewsets.ModelViewSet):
 
 
 class WikiDocsViewSet(viewsets.ModelViewSet):
-    # only show the wikidocs that the user has access to
+
     queryset = WikiDocument.objects.all()
     serializer_class = WikiDocsSerializer
     permission_classes = [permissions.IsAuthenticated]
