@@ -17,13 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
 from config import views
 
 api_patterns = [
-    path('auth/', include('rest_framework.urls')),
     path('common/', include('common.urls')),
     path('wiki/', include('wiki.urls')),
+    path('auth/', include('dj_rest_auth.urls')),
 ]
 
 urlpatterns = [
