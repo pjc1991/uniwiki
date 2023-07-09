@@ -12,6 +12,7 @@ def api_root(request, fmt=None):
     """
     return Response({
         'admin': reverse('admin:index', request=request, format=fmt),
+        'auth': reverse('rest_login', request=request, format=fmt),
         'common': reverse('common:api-root', request=request, format=fmt),
         'wiki': reverse('wiki:api-root', request=request, format=fmt),
     })
