@@ -142,6 +142,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        # session authentication is enabled for the browsable API
+        'rest_framework.authentication.SessionAuthentication',
     ],
 }
 
