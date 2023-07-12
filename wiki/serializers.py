@@ -1,14 +1,14 @@
 from django.contrib.auth.models import User
+from django.db import models
 from rest_framework import serializers
 
 from wiki.models import Universe, WikiDocument
 
 
 class WikiDocsSerializer(serializers.HyperlinkedModelSerializer):
-    universe = serializers.HyperlinkedRelatedField(view_name='wiki:universe-detail', queryset=Universe.objects.all())
-    owner = serializers.HyperlinkedRelatedField(view_name='common:user-detail', queryset=User.objects.all())
-    related_documents = serializers.HyperlinkedRelatedField(view_name='wiki:wikidocs-detail',
-                                                            queryset=WikiDocument.objects.all(), many=True)
+    universe = models.ForeignKey(Universe, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    related_documents = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     document_type = serializers.ChoiceField(choices=WikiDocument.DocumentType.choices)
 
     # version should be read-only

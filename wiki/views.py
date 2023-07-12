@@ -33,4 +33,4 @@ class WikiDocsViewSet(viewsets.ModelViewSet):
         universe = Universe.objects.get(id=self.request.data['universe'])
         if not universe.allowed_users.filter(id=self.request.user.id).exists():
             raise Exception("You are not allowed to create a document in this universe")
-        serializer.save(owner=self.request.user, universe=universe)
+        serializer.save(owner=self.request.user, universe=universe.id)
