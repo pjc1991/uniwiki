@@ -2,7 +2,7 @@
 from rest_framework import viewsets, permissions
 
 from wiki.models import Universe, WikiDocument
-from .serializers import UniverseSerializer, WikiDocsSerializer
+from .serializers import UniverseSerializer, WikiDocumentSerializer
 
 
 class UniverseViewSet(viewsets.ModelViewSet):
@@ -19,10 +19,10 @@ class UniverseViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user, allowed_users=[self.request.user])
 
 
-class WikiDocsViewSet(viewsets.ModelViewSet):
+class WikiDocumentViewSet(viewsets.ModelViewSet):
 
     queryset = WikiDocument.objects.all()
-    serializer_class = WikiDocsSerializer
+    serializer_class = WikiDocumentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):

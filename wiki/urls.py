@@ -4,11 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from .views import UniverseViewSet, WikiDocsViewSet
+from .views import UniverseViewSet, WikiDocumentViewSet
 
 router = routers.DefaultRouter()
 router.register(r'universe', UniverseViewSet)
-router.register(r'wikidocs', WikiDocsViewSet)
+router.register(r'wikidocs', WikiDocumentViewSet)
 
 app_name = 'wiki'
 

@@ -4,17 +4,17 @@ from rest_framework import serializers
 from wiki.models import Universe, WikiDocument
 
 
-class WikiDocsSerializer(serializers.ModelSerializer):
-    universe_name = serializers.CharField(source='universe.name', read_only=True)
+class WikiDocumentSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    universe = serializers.HyperlinkedRelatedField(view_name='wiki:universe-detail', read_only=True)
 
     class Meta:
         model = WikiDocument
         fields = [
             'id',
+            'universe',
             'name',
             'description',
-            'universe_name',
             'owner',
             'version',
             'related_documents',
@@ -27,17 +27,17 @@ class WikiDocsSerializer(serializers.ModelSerializer):
 
 
 class UniverseSerializer(serializers.ModelSerializer):
-    wiki_document = WikiDocsSerializer(many=True, read_only=True)
+    detail = serializers.HyperlinkedIdentityField(view_name='wiki:universe-detail', read_only=True)
 
     class Meta:
         model = Universe
         fields = [
             'id',
             'name',
+            'detail',
             'description',
             'created_at',
             'modified_at',
             'owner',
             'allowed_users',
-            'wiki_document',
         ]
