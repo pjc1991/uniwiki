@@ -33,6 +33,7 @@ typing-extensions = "==4.6.3"
 tzdata = "==2023.3"
 urllib3 = "==2.0.3"
 zipp = "==3.15.0"
+python-dotenv = "*"
 
 [dev-packages]
 
