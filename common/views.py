@@ -1,10 +1,21 @@
 from django.contrib.auth.models import User, Group
+from django.db.models import Model
+from django.forms import ModelForm
+from django.views.generic import ListView
 from rest_framework import viewsets
 
 from common.serializers import UserSerializer, GroupSerializer
 
 
 # Create your views here.
+
+class CustomModelListView(ListView):
+    model: Model = None
+
+    def get_queryset(self):
+        queryset = self.model.objects.all()
+        return queryset
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
