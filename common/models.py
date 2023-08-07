@@ -14,7 +14,7 @@ class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, help_text="Created time")
 
     # Updated time
-    updated_at = models.DateTimeField(auto_now=True, help_text="Updated time")
+    modified_at = models.DateTimeField(auto_now=True, help_text="Modified time")
 
     objects = models.Manager()
 

@@ -1,10 +1,12 @@
 from django.db import models
 
+from common.models import BaseModel
+
 
 # Create your models here.
 
 
-class Universe(models.Model):
+class Universe(BaseModel):
     """
     A universe is a collection of Objects, which can be edited by allowed users.
     """
@@ -21,7 +23,7 @@ class Universe(models.Model):
         return self.name
 
 
-class WikiDocument(models.Model):
+class WikiDocument(BaseModel):
     """
     A WikiDocument is a thing that can be edited by users,
     including characters, plot, setting, etc.
