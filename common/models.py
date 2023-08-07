@@ -41,3 +41,6 @@ class UniUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+# Create your model managers here.
+
