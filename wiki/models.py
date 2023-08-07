@@ -27,11 +27,11 @@ class Universe(BaseModel):
     modified_at = models.DateTimeField(auto_now=True, help_text="Modified time")
 
     # owner of the universe
-    owner = models.ForeignKey('auth.User', related_name='owned_universes', on_delete=models.CASCADE,
+    owner = models.ForeignKey('common.UniUser', related_name='owned_universes', on_delete=models.CASCADE,
                               help_text="Owner of the universe")
 
     # allowed users
-    allowed_users = models.ManyToManyField('auth.User', related_name='allowed_universes', blank=False,
+    allowed_users = models.ManyToManyField('common.UniUser', related_name='allowed_universes', blank=False,
                                            help_text="Allowed users")
 
     def __str__(self):
@@ -67,7 +67,7 @@ class WikiDocument(BaseModel):
     universe = models.ForeignKey(Universe, on_delete=models.CASCADE, blank=False, help_text="Universe of the document")
 
     # owner of the document
-    owner = models.ForeignKey('auth.User', related_name='owned_objects', on_delete=models.CASCADE, blank=False,
+    owner = models.ForeignKey('common.UniUser', related_name='owned_objects', on_delete=models.CASCADE, blank=False,
                               help_text="Owner of the document")
 
     # allowed users

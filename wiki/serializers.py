@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User
+
 from rest_framework import serializers
 
+from common.models import UniUser as User
 from wiki.models import Universe, WikiDocument
 
 
