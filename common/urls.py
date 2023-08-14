@@ -24,4 +24,5 @@ def api_root(request, fmt=None):
 urlpatterns = [
     path('', include(router.urls)),
     path('', api_root, name='common-api-root'),
+    path('signup/', views.UniWikiUserView.as_view(), name='signup'),
 ]
