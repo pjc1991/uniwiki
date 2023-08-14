@@ -1,9 +1,68 @@
+
+
 현재 개발 중 (Under construction) 
 
-**기능 정의**
+---
 
-픽션 유니버스 작성 및 관리 어플리케이션. (세계관 위키) 
+# What is this?
 
+창작물을 위한 세계관의 작성을 돕는 웹 어플리케이션입니다.
+
+# What does this do?
+
+- 회원가입 기능
+- 세계관 기능
+- 문서 기능
+- 검색 기능
+- 공유 기능
+
+# How to run?
+
+## Requirements
+
+- Python 3.9
+
+## Install
+
+```Bash
+# clone repository
+git clone git@github.com:pjc1991/uniwiki.git
+
+# move to project directory
+cd uniwiki
+
+# create virtual environment
+python -m venv venv
+
+# Install pipenv
+pip install pipenv
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Install dependencies
+pipenv install
+
+# migrate django modules
+python manage.py migrate
+
+# deactivate virtual environment
+deactivate
+```
+
+
+## Run
+
+```Bash
+# Activate virtual environment
+source venv/bin/activate
+
+# Run server
+pipenv run python manage.py runserver
+```
+
+---
+# Roadmap
 \*\ : 필수 구현 사항
 
 - 회원가입 * : 이메일 주소와 비밀번호(암호화)만 저장. (최소의 개인 정보)
@@ -35,6 +94,3 @@
 - 통합 검색 기능
     - 모든 문서들을 한번에 검색하여 해당 내용이 포함된 문서들을 리스트함.
     - 제목에 포함된 문서, 내용에 포함된 문서, 위의 문서들과 관계가 있는 문서 순서대로 리스트함.
-```Bash\
-pip freeze > requirements.txt
-```
