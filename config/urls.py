@@ -27,8 +27,10 @@ api_patterns = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(api_patterns)),
+    path('common/', include('common.urls')),
+    path('wiki/', include('wiki.urls')),
 
-    # API root view
+    # API views
     path('api/', views.api_root, name='api-root'),
+    path('api/', include(api_patterns)),
 ]
