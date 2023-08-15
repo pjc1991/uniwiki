@@ -20,8 +20,8 @@ from django.urls import path, include
 from config import views
 
 api_patterns = [
-    path('common/', include('common.urls')),
-    path('wiki/', include('wiki.urls')),
+    path('common/', include('common.api_urls')),
+    path('wiki/', include('wiki.api_urls')),
     path('auth/', include('dj_rest_auth.urls')),
 ]
 
@@ -30,5 +30,5 @@ urlpatterns = [
     path('api/', include(api_patterns)),
 
     # API root view
-    path('', views.api_root, name='api-root'),
+    path('api/', views.api_root, name='api-root'),
 ]
