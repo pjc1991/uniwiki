@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group
 from django.db.models import Model
-from django.forms import ModelForm
+from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView
 from rest_framework import viewsets
 
@@ -13,7 +13,7 @@ from common.serializers import UserSerializer, GroupSerializer
 
 # --- Standard views ---
 
-class UniWikiUserView(CreateView):
+class UniWikiSignupView(CreateView):
     template_name = 'common/signup.html'
     model = UniUser
     form_class = UniUserForm
