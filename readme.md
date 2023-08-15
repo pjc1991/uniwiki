@@ -21,6 +21,7 @@
 ## Requirements
 
 - Python 3.9
+- npm
 
 ## Install
 
@@ -43,6 +44,9 @@ source venv/bin/activate
 # Install dependencies
 pipenv install
 
+# install npm packages
+npm install
+
 # migrate django modules
 python manage.py migrate
 
@@ -56,6 +60,9 @@ deactivate
 ```Bash
 # Activate virtual environment
 source venv/bin/activate
+
+# build tailwind css
+npx tailwindcss -i ./static/css/base.css -o ./static/css/tailwind.css --watch
 
 # Run server
 pipenv run python manage.py runserver
