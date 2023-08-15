@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group
 from django.db.models import Model
 from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, RedirectView
 from rest_framework import viewsets
 
 from common.forms import UniUserForm, UniUserLoginForm
@@ -12,6 +12,16 @@ from common.serializers import UserSerializer, GroupSerializer
 # Create your views here.
 
 # --- Standard views ---
+
+class UniWikiIndexView(RedirectView):
+    # if user is logged in, redirect to wiki index
+    # if user is not logged in, redirect to login page
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return '/wiki/'
+        else:
+            return '/login/'
+
 
 class UniWikiSignupView(CreateView):
     template_name = 'common/signup.html'
