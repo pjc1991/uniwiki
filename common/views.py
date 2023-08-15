@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView
 from rest_framework import viewsets
 
-from common.forms import UniUserForm
+from common.forms import UniUserForm, UniUserLoginForm
 from common.models import UniUser
 from common.serializers import UserSerializer, GroupSerializer
 
@@ -17,6 +17,16 @@ class UniWikiSignupView(CreateView):
     template_name = 'common/signup.html'
     model = UniUser
     form_class = UniUserForm
+
+
+class UniWikiLoginView(CreateView):
+    template_name = 'common/login.html'
+    model = UniUser
+    form_class = UniUserLoginForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        return redirect(self.success_url)
 
 
 # --- API views ---
