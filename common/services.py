@@ -1,4 +1,3 @@
-
 # Create your services here.
 
 from django.contrib.auth import authenticate, login
