@@ -1,7 +1,3 @@
-# Create your services here.
-from django.contrib.auth import authenticate, login
-
-from common.forms import UniUserLoginForm
 from common.models import UniUser
 from wiki.models import Universe
 
