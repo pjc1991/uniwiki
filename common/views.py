@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from common.forms import UniUserForm
 from common.models import UniUser
 from common.serializers import UserSerializer, GroupSerializer
-from wiki import services
+from common import services
 
 
 # Create your views here.
