@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, RedirectView
 from rest_framework import viewsets
 
-from common.forms import UniUserForm, UniUserLoginForm
+from common.forms import UniUserForm
 from common.models import UniUser
 from common.serializers import UserSerializer, GroupSerializer
 from wiki import services
@@ -33,11 +33,12 @@ class UniWikiSignupView(CreateView):
 class UniWikiLoginView(CreateView):
     template_name = 'common/login.html'
     model = UniUser
-    form_class = UniUserLoginForm
     success_url = '/wiki/'
 
     def post(self, request, *args, **kwargs):
-        if not services.login_user(request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password1')
+        if not services.login_user(request, username, password):
             return redirect('/login/')
         return redirect(self.success_url)
 

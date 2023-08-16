@@ -9,9 +9,3 @@ class UniUserForm(UserCreationForm):
     class Meta:
         model = UniUser
         fields = ('username', 'email', 'password1', 'password2')
-
-
-class UniUserLoginForm(UserCreationForm):
-    class Meta:
-        model = UniUser
-        fields = ('username', 'password1')
