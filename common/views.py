@@ -34,10 +34,11 @@ class UniWikiLoginView(CreateView):
     template_name = 'common/login.html'
     model = UniUser
     success_url = '/wiki/'
+    fields = ['username', 'password']
 
     def post(self, request, *args, **kwargs):
         username = request.POST.get('username')
-        password = request.POST.get('password1')
+        password = request.POST.get('password')
         if not services.login_user(request, username, password):
             return redirect('/login/')
         return redirect(self.success_url)
