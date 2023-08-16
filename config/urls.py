@@ -26,6 +26,7 @@ api_patterns = [
 ]
 
 urlpatterns = [
+    path('', views.UniWikiIndexView.as_view(), name='uniwiki-index'),
     path('admin/', admin.site.urls),
     path('common/', include('common.urls')),
     path('wiki/', include('wiki.urls')),

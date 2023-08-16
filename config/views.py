@@ -1,3 +1,4 @@
+from django.views.generic import RedirectView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -16,3 +17,13 @@ def api_root(request, fmt=None):
         'common': reverse('common:api-root', request=request, format=fmt),
         'wiki': reverse('wiki:api-root', request=request, format=fmt),
     })
+
+
+class UniWikiIndexView(RedirectView):
+    # if user is logged in, redirect to wiki index
+    # if user is not logged in, redirect to login page
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return '/wiki/'
+        else:
+            return '/common/login/'
