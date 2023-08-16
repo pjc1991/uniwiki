@@ -1,9 +1,35 @@
 # Create your views here.
+from django.views.generic import ListView, DetailView
 from rest_framework import viewsets, permissions
 
 from wiki.models import Universe, WikiDocument
 from .serializers import UniverseSerializer, WikiDocumentSerializer
 
+
+# Standard Views
+
+
+class UniWikiListView(ListView):
+    template_name = 'wiki/universe_list.html'
+    model = Universe
+    permissions = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Universe.objects.filter(allowed_users=user)
+
+
+class UniWikiDetailView(DetailView):
+    template_name = 'wiki/universe_detail.html'
+    model = Universe
+    permissions = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Universe.objects.filter(allowed_users=user)
+
+
+# --- API Views ---
 
 class UniverseViewSet(viewsets.ModelViewSet):
 
