@@ -7,6 +7,7 @@ from rest_framework import viewsets
 from common.forms import UniUserForm, UniUserLoginForm
 from common.models import UniUser
 from common.serializers import UserSerializer, GroupSerializer
+from wiki import services
 
 
 # Create your views here.
@@ -33,7 +34,12 @@ class UniWikiLoginView(CreateView):
     template_name = 'common/login.html'
     model = UniUser
     form_class = UniUserLoginForm
-    success_url = '/'
+    success_url = '/wiki/'
+
+    def post(self, request, *args, **kwargs):
+        if not services.login_user(request, *args, **kwargs):
+            return redirect('/login/')
+        return redirect(self.success_url)
 
     def form_valid(self, form):
         return redirect(self.success_url)
