@@ -29,25 +29,3 @@ def is_available_universe(user: UniUser, universe: Universe):
         return True
 
     return False
-
-
-def auth_login(request, user):
-    pass
-
-
-def login_user(request, *args, **kwargs) -> bool:
-    form = UniUserLoginForm(request.POST)
-    if not form.is_valid():
-        print("Form is not valid"
-              "form.errors: ", form.errors)
-        raise Exception("Form is not valid")
-
-    username = form.cleaned_data.get('username')
-    password = form.cleaned_data.get('password1')
-    user = authenticate(username=username, password=password)
-
-    if user is None:
-        raise Exception("User is None")
-
-    login(request, user)
-    return True
