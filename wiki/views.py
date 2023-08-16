@@ -32,7 +32,6 @@ class UniWikiDetailView(DetailView):
 # --- API Views ---
 
 class UniverseViewSet(viewsets.ModelViewSet):
-
     queryset = Universe.objects.all()
     serializer_class = UniverseSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -46,7 +45,6 @@ class UniverseViewSet(viewsets.ModelViewSet):
 
 
 class WikiDocumentViewSet(viewsets.ModelViewSet):
-
     queryset = WikiDocument.objects.all()
     serializer_class = WikiDocumentSerializer
     permission_classes = [permissions.IsAuthenticated]
