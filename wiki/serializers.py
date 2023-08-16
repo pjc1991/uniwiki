@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 
 from common.models import UniUser as User

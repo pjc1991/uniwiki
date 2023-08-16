@@ -2,21 +2,21 @@
 {% block content %}
     <!-- universe detail -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ universe.name }}</h1>
-                <p>{{ universe.description }}</p>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ universe.name }}</h1>
+            <p>{{ universe.description }}</p>
         </div>
-        <div class="row">
-            <!-- document list -->
-            <div class="col-md-6">
-                <h2>Documents</h2>
-                <ul>
-                    {% for document in universe.documents %}
-                        <li>{{ document.name }}</li>
-                    {% endfor %}
-                </ul>
+    </div>
+    <div class="row">
+        <!-- document list -->
+        <div class="col-md-6">
+            <h2>Documents</h2>
+            <ul>
+                {% for document in universe.documents %}
+                    <li>{{ document.name }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 {% endblock %}

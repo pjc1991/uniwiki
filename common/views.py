@@ -4,10 +4,10 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, RedirectView
 from rest_framework import viewsets
 
+from common import services
 from common.forms import UniUserForm
 from common.models import UniUser
 from common.serializers import UserSerializer, GroupSerializer
-from common import services
 
 
 # Create your views here.

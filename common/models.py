@@ -43,4 +43,3 @@ class UniUser(AbstractUser):
         return self.username
 
 # Create your model managers here.
-

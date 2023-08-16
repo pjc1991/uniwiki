@@ -1,6 +1,4 @@
-
-
-현재 개발 중 (Under construction) 
+현재 개발 중 (Under construction)
 
 ---
 
@@ -54,7 +52,6 @@ python manage.py migrate
 deactivate
 ```
 
-
 ## Run
 
 ```Bash
@@ -69,7 +66,9 @@ pipenv run python manage.py runserver
 ```
 
 ---
+
 # Roadmap
+
 \*\ : 필수 구현 사항
 
 - 회원가입 * : 이메일 주소와 비밀번호(암호화)만 저장. (최소의 개인 정보)
@@ -93,11 +92,11 @@ pipenv run python manage.py runserver
     - 문서 조회 *
     - 문서 수정 *
     - 문서 삭제 *
-    
+
     - 캐릭터 * : 등장인물
     - 설정 * : 등장인물이 아닌 문서
     - 관계 : 문서와 문사 간의 관계를 나타내는 문서
-    
+
 - 통합 검색 기능
     - 모든 문서들을 한번에 검색하여 해당 내용이 포함된 문서들을 리스트함.
     - 제목에 포함된 문서, 내용에 포함된 문서, 위의 문서들과 관계가 있는 문서 순서대로 리스트함.
