@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <h1>Universes</h1>
             <ul>
-                {% for universe in universes %}
+                {% for universe in object_list %}
                     <li><a href="{% url 'uniwiki-detail' pk=universe.id %}">{{ universe.name }}</a></li>
                 {% endfor %}
             </ul>
