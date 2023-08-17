@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="universe_create">
+        <form action="{% url 'uniwiki-create' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Universe</button>
+        </form>
+    </div>
+{% endblock %}

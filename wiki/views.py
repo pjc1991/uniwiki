@@ -19,6 +19,28 @@ class UniWikiListView(ListView):
         return Universe.objects.filter(allowed_users=user)
 
 
+class UniWikiCreateView(CreateView):
+    template_name = 'wiki/universe_create.html'
+    model = Universe
+    fields = ['name', 'description']
+    permissions = [permissions.IsAuthenticated]
+    success_url = '/wiki/'
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if not form.is_valid():
+            return self.form_invalid(form)
+        universe = form.save(commit=False)
+        universe.owner = self.request.user
+        universe.save()
+        universe.allowed_users.set([self.request.user])
+        return self.form_valid(form)
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
 class UniWikiDetailView(DetailView):
     template_name = 'wiki/universe_detail.html'
     model = Universe

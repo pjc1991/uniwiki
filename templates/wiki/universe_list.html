@@ -9,6 +9,8 @@
                     <li><a href="{% url 'uniwiki-detail' pk=universe.id %}">{{ universe.name }}</a></li>
                 {% endfor %}
             </ul>
+            <!-- button to create new universe -->
+            <a href="{% url 'uniwiki-create' %}" class="btn btn-primary">New Universe</a>
         </div>
     </div>
 {% endblock %}
