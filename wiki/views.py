@@ -1,5 +1,5 @@
 # Create your views here.
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from rest_framework import viewsets, permissions
 
 from wiki.models import Universe, WikiDocument
@@ -12,6 +12,7 @@ from .serializers import UniverseSerializer, WikiDocumentSerializer
 class UniWikiListView(ListView):
     template_name = 'wiki/universe_list.html'
     model = Universe
+    paginate_by = 10
     permissions = [permissions.IsAuthenticated]
 
     def get_queryset(self):
