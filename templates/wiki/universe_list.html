@@ -10,7 +10,13 @@
                 {% endfor %}
             </ul>
             <!-- button to create new universe -->
-            <a href="{% url 'uniwiki-create' %}" class="btn btn-primary">New Universe</a>
+            <button class="rounded-full" id="universe-create">New Universe</button>
         </div>
     </div>
+    <script>
+        // create new universe
+        $('#universe-create').click(function() {
+            window.location.href = "{% url 'uniwiki-create' %}";
+        });
+    </script>
 {% endblock %}
