@@ -3,7 +3,10 @@
 from django.contrib.auth import authenticate, login
 
 
-def login_user(request, username, password):
+def login_user(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
     user = authenticate(username=username, password=password)
 
     if user is None:
