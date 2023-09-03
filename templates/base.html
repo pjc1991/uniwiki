@@ -6,11 +6,12 @@
     <title>UniWiki</title>
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
 </head>
-<body>
+<body class="h-full bg-sky-950">
 <!-- -->
- <div class="bg-sky-950">
-    {% block content %}
-    {% endblock %}
+    <div class="">
+        {% block content %}
+        {% endblock %}
+    </div>
  </div>
 </body>
 </html>
