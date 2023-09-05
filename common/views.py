@@ -24,25 +24,11 @@ class UniWikiIndexView(RedirectView):
             return '/login/'
 
 
-class UniWikiSignupView(CreateView):
-    template_name = 'common/signup.html'
-    model = UniUser
-    form_class = UniUserForm
-
-
 class UniWikiLoginView(CreateView):
-    template_name = 'common/login.html'
+    template_name = 'wiki/app.html'
     model = UniUser
     success_url = '/wiki/'
     fields = ['username', 'password']
-
-    def post(self, request, *args, **kwargs):
-        if not services.login_user(request):
-            return redirect('/login/')
-        return redirect(self.success_url)
-
-    def form_valid(self, form):
-        return redirect(self.success_url)
 
 
 # --- API views ---
