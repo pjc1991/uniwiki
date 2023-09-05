@@ -22,22 +22,22 @@ Vue.component('template-button', {
 `
 })
 
+
+
 Vue.component('login-form', {
-    props: ['loginForm'],
+    props: ['login-form-props'],
     template: `
 <div id="login-form" class="bg-gray-100 p-8 rounded shadow-md w-1/3">
-    <template-form v-for="field in loginForm[fields]" :field="field" v-bind:key="field.id" ></template-form>
-    <template-button v-bind:button="loginForm.loginButton"></template-button>
+    <template-form v-for="field in loginFormProps.fields" :field="field" v-bind:key="field.id" ></template-form>
+    <template-button v-bind:button="loginFormProps.loginButton" @click="alert('test')"></template-button>
 </div>
    `,
-    components: {
-        'template-form': 'template-form',
-        'template-button': 'template-button'
-    }
 });
 
-const login = new Vue({
-    el: '#login',
+
+
+const app = new Vue({
+    el: '#app',
     data: {
         loginInfo: {
             fields: [
