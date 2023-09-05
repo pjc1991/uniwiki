@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="app" class="flex justify-center items-center h-screen">
+        <login-form :login-form-props="loginInfo"></login-form>
+    </div>
+    {% load static %}
+    <script src="{% static 'script/script.js' %}"></script>
+{% endblock %}
