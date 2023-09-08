@@ -381,6 +381,6 @@ pyrightconfig.json
 .idea/
 
 node_modules/
-dist/
+static/
 package-lock.json
 webpack-stats.json
