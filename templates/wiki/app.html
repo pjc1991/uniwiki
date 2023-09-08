@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
 {% load render_bundle from webpack_loader %}
-{% render_bundle "chunk-vendors" %}
-{% render_bundle "app" %}
-{% block content %}
-    aaaaaaaa
-    <div id="app" class="flex justify-center items-center h-screen">
-        <login-form :login-form-props="loginInfo"></login-form>
-    </div>
-    {% load static %}
-{% endblock %}
+
+<html>
+<head>
+</head>
+<body>
+    test
+    <div id="app"></div>
+{% render_bundle 'index' %}
+</body>
+</html>

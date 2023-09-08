@@ -4,20 +4,32 @@ const path = require('path')
 module.exports = defineConfig({
     transpileDependencies: true,
     publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
-    outputDir: '../static',
+    outputDir: '../static/webpack_bundles',
     assetsDir: 'assets',
-    indexPath: '../templates/wiki/app.html',
+    indexPath: 'index.html',
     lintOnSave: true,
     runtimeCompiler: true,
     configureWebpack: {},
+    pages: {
+        index: 'src/main.js'
+    },
     chainWebpack: config => {
         config
-            .plugin('BundleTracker')
+            .optimization
+            .splitChunks(false)
+        config
+            .devServer
+            .host('0.0.0.0')
+            .port(8080)
+            .https(false)
+            .headers({'Access-Control-Allow-Origin': ['\*']})
+        config.plugin('BundleTracker')
             .use(BundleTracker, [{filename: '../webpack-stats.json'}])
             .tap(args => {
                 return [{
                     path: __dirname, filename: 'webpack-stats.json'
                 }]
             })
+
     },
 })

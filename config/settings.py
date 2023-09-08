@@ -183,8 +183,9 @@ REST_AUTH = {
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'CACHE': DEBUG,
-        'BUNDLE_DIR_NAME': '/bundles/',  # must end with slash
+        'CACHE': not DEBUG,
         'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }
 }
