@@ -4,5 +4,7 @@
         <login-form :login-form-props="loginInfo"></login-form>
     </div>
     {% load static %}
-    <script src="{% static 'script/script.js' %}"></script>
+
+    {% render_bundle "chunk-vendors" %}
+{% render_bundle "app" %}
 {% endblock %}

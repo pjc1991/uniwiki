@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "webpack-bundle-tracker": "^2.0.1"
   },
   "dependencies": {
     "npx": "^10.2.2"
