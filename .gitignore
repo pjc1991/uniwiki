@@ -382,5 +382,3 @@ pyrightconfig.json
 
 node_modules/
 static/
-package-lock.json
-webpack-stats.json
