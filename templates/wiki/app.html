@@ -1,11 +1,11 @@
-{% load render_bundle from webpack_loader %}
+{% load django_vite %}
 
 <html>
 <head>
+    {% vite_hmr_client %}
 </head>
 <body>
-    test
     <div id="app"></div>
-{% render_bundle 'index' %}
+    {% vite_asset 'src/main.js' %}
 </body>
 </html>

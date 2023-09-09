@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'webpack_loader',
+    'django_vite'
 ]
 
 MIDDLEWARE = [
@@ -129,9 +129,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'frontend' / 'static' / 'dist'
+
+DJANGO_VITE_DEV_MODE = DEBUG
+
+STATIC_ROOT = BASE_DIR / "collected_static"
+
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    DJANGO_VITE_ASSETS_PATH
 ]
 
 # Default primary key field type
@@ -181,11 +189,4 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE': 'jwt-auth',
 }
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
-    }
-}
+
