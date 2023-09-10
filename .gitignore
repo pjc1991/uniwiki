@@ -381,3 +381,4 @@ pyrightconfig.json
 .idea/
 
 node_modules/
+static/
