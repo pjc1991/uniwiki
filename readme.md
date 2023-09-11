@@ -54,19 +54,10 @@ deactivate
 
 ## Run
 
-1. Activate virtual environment and build CSS
-
 ```Bash
-# Activate virtual environment
-source venv/bin/activate
-
-# build tailwind css
-npx tailwindcss -i ./static/css/base.css -o ./static/css/tailwind.css --watch
-```
-
-2. Run server
-
-```bash
+cd frontend && 
+npm run dev  & && 
+cd .. &&
 python manage.py runserver
 ```
 
