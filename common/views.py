@@ -12,58 +12,5 @@ from common.serializers import UserSerializer, GroupSerializer
 
 # Create your views here.
 
-# --- Standard views ---
-
-class UniWikiIndexView(RedirectView):
-    # if user is logged in, redirect to wiki index
-    # if user is not logged in, redirect to login page
-    def get_redirect_url(self, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return '/wiki/'
-        else:
-            return '/login/'
-
-
-class UniWikiLoginView(CreateView):
-    template_name = 'wiki/app.html'
-    model = UniUser
-    success_url = '/wiki/'
-    fields = ['username', 'password']
-
 
 # --- API views ---
-class CustomModelListView(ListView):
-    model: Model = None
-
-    def get_queryset(self):
-        queryset = self.model.objects.all()
-        return queryset
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = UniUser.objects.all()
-    serializer_class = UserSerializer
-
-    def get_queryset(self):
-        user = self.request.user
-        return UniUser.objects.filter(id=user.id)
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
-    # only allow users to see their own user object
-
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_superuser:
-            return Group.objects.all()
-        else:
-            return user.groups.all()
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
