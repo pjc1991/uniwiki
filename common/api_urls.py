@@ -9,7 +9,8 @@ from common import views
 router = routers.DefaultRouter()
 
 app_name = 'common'
-
+UserViewSet = views.UserViewSet;
+router.register(r'users', UserViewSet, basename='user')
 
 @api_view(['GET'])
 def api_root(request, fmt=None):

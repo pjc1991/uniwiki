@@ -1,16 +1,21 @@
-from django.contrib.auth.models import Group
-from django.db.models import Model
-from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView, RedirectView
-from rest_framework import viewsets
 
-from common import services
-from common.forms import UniUserForm
+from rest_framework import viewsets
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
+
 from common.models import UniUser
-from common.serializers import UserSerializer, GroupSerializer
+from common.serializers import UserSerializer
 
 
 # Create your views here.
 
 
 # --- API views ---
+@permission_classes([IsAuthenticated])
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = UniUser.objects.all()
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return UniUser.objects.filter(pk=user.pk)
