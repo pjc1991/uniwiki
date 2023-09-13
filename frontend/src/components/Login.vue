@@ -5,6 +5,7 @@
     <basicForm :name="'password'" :description="'Password'" :is-secret="true" v-model="password"></basicForm>
     <button type="submit">login button</button>
   </form>
+  <p>Are you new here?</p> <button @click="signup">Register</button>
   </html>
 </template>
 
@@ -37,11 +38,16 @@ export default {
       .then(response => response.json())
       .then(data => {
         localStorage.setItem('jwt', data.access)
+        console.log('Success:', data);
+        this.$emit('get-jwt', data.access)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-    }
+    },
+    signup(){
+      // todo
+    },
   }
 }
 
