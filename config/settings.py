@@ -61,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'common.middleware.MoveJWTCookieIntoTheBody',
+    'common.middleware.MoveJWTRefreshCookieIntoTheBody',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -173,7 +175,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 REST_USE_JWT = True
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -186,7 +188,9 @@ AUTHENTICATION_BACKENDS = [
 
 REST_AUTH = {
     'USE_JWT': True,
-    'JWT_AUTH_COOKIE': 'jwt-auth',
+    'JWT_AUTH_COOKIE': 'jwt',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh',
 }
 
-
+JWT_AUTH_COOKIE = 'jwt'
+JWT_AUTH_REFRESH_COOKIE = 'refresh'
