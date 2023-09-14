@@ -4,7 +4,7 @@
         class="bg-white text-black p-6 rounded-lg">
       <Login v-if="!loggedIn && !signup" @get-jwt="loginCheck" @set-signup="setSignup"></Login>
       <Wiki v-if="loggedIn" :user="user" @get-jwt="loginCheck"></Wiki>
-      <Signup v-if="signup"></Signup>
+      <Signup v-if="signup" @set-signup="setSignup"></Signup>
     </div>
   </div>
 </template>
@@ -51,23 +51,19 @@ export default {
         },
       }).then(response => {
         if(response.status !== 200) {
-          console.log("login failed")
           throw new Error('login failed')
         }
         return response.json()
       }).then(data => {
-        console.log(data)
         this.loggedIn = true
         this.user = data[0]
       }).catch((error) => {
-        console.error('Error:', error);
         localStorage.removeItem('jwt')
         this.$emit('get-jwt', '')
       });
 
     },
     setSignup(bool) {
-      console.log('setSignup')
       this.signup = !!bool
     }
   }

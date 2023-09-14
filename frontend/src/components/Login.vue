@@ -15,7 +15,7 @@
     </form>
     <div class="justify-center flex">
       <p class="mt-4 text-blue-500 hover:text-blue-800 cursor-pointer"
-         @click="triggerSignup">
+         @click="toggleSignup">
         Are you new here?
       </p>
     </div>
@@ -68,7 +68,7 @@ export default {
         this.$emit('get-jwt', '')
       });
     },
-    triggerSignup(){
+    toggleSignup(){
       this.$emit('set-signup', true)
     },
   }
