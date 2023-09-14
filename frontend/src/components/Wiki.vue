@@ -1,5 +1,6 @@
 <script>
 import {defineComponent} from 'vue'
+import {getCookie} from '../utils'
 
 export default defineComponent({
   props: [
@@ -12,8 +13,23 @@ export default defineComponent({
   },
   methods: {
     signOff() {
-      localStorage.removeItem('jwt')
-      this.$emit('get-jwt', '')
+      const csrftoken = getCookie('csrftoken')
+      fetch('/api/common/auth/logout/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+      }).then(response => {
+        if (response.status !== 200) {
+          throw new Error('logout failed')
+        }
+      }).then(data => {
+        this.$emit('get-logged-in', '')
+      }).catch((error) => {
+        console.log(error)
+      });
+
     }
   },
 })

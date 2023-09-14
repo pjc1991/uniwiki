@@ -42,11 +42,11 @@ export default {
       fetch('/api/common/auth/login/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: this.email,
-          password: this.password
+          password: this.password,
         })
       })
       .then(response => {
@@ -57,15 +57,10 @@ export default {
         return response.json()
       })
       .then(data => {
-        console.log(data)
-        localStorage.setItem('jwt', data.access)
-        console.log('Success:', data);
-        this.$emit('get-jwt', data.access)
+        this.$emit('get-logged-in', data.user)
       })
       .catch((error) => {
-        console.error('Error:', error);
-        localStorage.removeItem('jwt')
-        this.$emit('get-jwt', '')
+        this.$emit('get-logged-in', '')
       });
     },
     toggleSignup(){

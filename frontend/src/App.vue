@@ -1,9 +1,10 @@
 <template>
   <div class="bg-blue-600 flex items-center justify-center min-h-screen">
     <div
+        v-if="!loading"
         class="bg-white text-black p-6 rounded-lg">
-      <Login v-if="!loggedIn && !signup" @get-jwt="loginCheck" @set-signup="setSignup"></Login>
-      <Wiki v-if="loggedIn" :user="user" @get-jwt="loginCheck"></Wiki>
+      <Login v-if="!loggedIn && !signup" @get-logged-in="loginCheck" @set-signup="setSignup"></Login>
+      <Wiki v-if="loggedIn" :user="user" @get-logged-in="loginCheck"></Wiki>
       <Signup v-if="signup" @set-signup="setSignup"></Signup>
     </div>
   </div>
@@ -13,7 +14,6 @@
 import Login from './components/Login.vue'
 import Wiki from "./components/Wiki.vue";
 import Signup from "./components/Signup.vue";
-
 export default {
   name: 'App',
   components: {
@@ -25,32 +25,33 @@ export default {
     return {
       loggedIn: false,
       signup: false,
+      loading: true,
       user: '',
-      jwt: ''
     }
   },
   mounted() {
-    this.jwt = localStorage.getItem('jwt')
-    this.loginCheck(this.jwt)
+    this.getUserData()
   },
   methods: {
-    loginCheck(jwt) {
-      if (jwt === '') {
+
+    loginCheck(user) {
+      if (user === ''){
         this.loggedIn = false
         this.user = ''
         return
       }
-      this.getUserData(jwt)
+      this.loggedIn = true
+      this.user = user
     },
-    getUserData(jwt) {
-      fetch('/api/common/users/', {
+
+    getUserData() {
+      fetch('/api/common/users', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + jwt
         },
       }).then(response => {
-        if(response.status !== 200) {
+        if (response.status !== 200) {
           throw new Error('login failed')
         }
         return response.json()
@@ -58,14 +59,16 @@ export default {
         this.loggedIn = true
         this.user = data[0]
       }).catch((error) => {
-        localStorage.removeItem('jwt')
         this.$emit('get-jwt', '')
+      }).finally(() => {
+        this.loading = false
       });
-
     },
+
     setSignup(bool) {
       this.signup = !!bool
-    }
+    },
+
   }
 }
 </script>
