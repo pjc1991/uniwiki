@@ -1,12 +1,26 @@
 <template>
-  <html>
-  <form @submit.prevent="login">
-    <basicForm :name="'email'" :description="'E-mail'" v-model="email"></basicForm>
-    <basicForm :name="'password'" :description="'Password'" :is-secret="true" v-model="password"></basicForm>
-    <button type="submit">login button</button>
-  </form>
-  <p>Are you new here?</p> <button @click="signup">Register</button>
-  </html>
+  <div class="content-center">
+    <form @submit.prevent="login">
+      <basicForm :name="'email'" :description="'E-mail'" v-model="email"></basicForm>
+      <basicForm :name="'password'" :description="'Password'" :is-secret="true" v-model="password"></basicForm>
+      <div class="flex justify-end">
+        <button
+            type="submit"
+            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold
+            py-2 px-4 rounded"
+        >
+          Login!
+        </button>
+      </div>
+    </form>
+    <div class="justify-center flex">
+      <p class="mt-4 text-blue-500 hover:text-blue-800 cursor-pointer"
+         @click="triggerSignup">
+        Are you new here?
+      </p>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -35,18 +49,27 @@ export default {
           password: this.password
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          console.log("login failed")
+          throw new Error('login failed')
+        }
+        return response.json()
+      })
       .then(data => {
+        console.log(data)
         localStorage.setItem('jwt', data.access)
         console.log('Success:', data);
         this.$emit('get-jwt', data.access)
       })
       .catch((error) => {
         console.error('Error:', error);
+        localStorage.removeItem('jwt')
+        this.$emit('get-jwt', '')
       });
     },
-    signup(){
-      // todo
+    triggerSignup(){
+      this.$emit('set-signup', true)
     },
   }
 }
