@@ -39,20 +39,28 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="wiki-main h-full flex flex-col">
-      <div class="wiki-main-content flex flex-grow">
-        <WikiSideMenu></WikiSideMenu>
-        <WikiCurrentPage></WikiCurrentPage>
-      </div>
-      <div class="justify-start mt-5">
-        <p class="text-gray-700 text-base mb-4 truncate hover:underline font-serif">
-          Yes I'm logged in as {{ user.email }}
-        </p>
-      </div>
-      <div class="wiki-main-button flex justify-end">
-        <BasicButton @click="signOff" :description="'Sign off'"></BasicButton>
-      </div>
-    </div>
+<div class="wiki-main h-full flex flex-col">
+  <div class="wiki-main-content flex flex-grow">
+    <WikiSideMenu class="wiki-side-menu-component"></WikiSideMenu>
+    <WikiCurrentPage class="wiki-current-page-component"></WikiCurrentPage>
+  </div>
+
+  <div class="flex flex-col items-start mt-5">
+    <p class="text-gray-700 text-base mb-4 truncate hover:underline font-serif">
+      Yes I'm logged in as {{ user.email }}
+    </p>
+  </div>
+
+  <div class="wiki-main-button flex justify-end mt-auto">
+    <BasicButton
+      @click="signOff"
+      :description="'Sign off'"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+    </BasicButton>
+  </div>
+</div>
+
 </template>
 
 <style scoped>

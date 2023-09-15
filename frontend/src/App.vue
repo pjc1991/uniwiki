@@ -1,12 +1,27 @@
 <template>
-  <div class="bg-blue-600 flex items-center justify-center h-screen">
-
+  <div class="bg-blue-600 flex items-center justify-center h-screen transition-all duration-200 ease-in-out">
     <div
         v-if="!loading"
-        class="bg-white text-black p-6 rounded-lg shadow-lg w-2/3 h-3/4">
-      <Login v-if="!loggedIn && !signup" @get-logged-in="loginCheck" @set-signup="setSignup"></Login>
-      <Wiki v-if="loggedIn" :user="user" @get-logged-in="loginCheck"></Wiki>
-      <Signup v-if="signup" @set-signup="setSignup"></Signup>
+        class="main-container bg-white text-black p-6 rounded-lg shadow-lg w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-5/6 transition-all duration-200 ease-in-out">
+      <Login
+        v-if="!loggedIn && !signup"
+        @get-logged-in="loginCheck"
+        @set-signup="setSignup"
+        class="login-component">
+      </Login>
+
+      <Wiki
+        v-if="loggedIn"
+        :user="user"
+        @get-logged-in="loginCheck"
+        class="wiki-component">
+      </Wiki>
+
+      <Signup
+        v-if="signup"
+        @set-signup="setSignup"
+        class="signup-component">
+      </Signup>
     </div>
   </div>
 </template>
