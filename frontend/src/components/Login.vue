@@ -1,16 +1,16 @@
 <template>
   <div class="content-center">
     <form @submit.prevent="login">
-      <basicForm :name="'email'" :description="'E-mail'" v-model="email"></basicForm>
-      <basicForm :name="'password'" :description="'Password'" :is-secret="true" v-model="password"></basicForm>
+      <BasicForm :name="'email'" :description="'E-mail'" v-model="email"></BasicForm>
+      <BasicForm :name="'password'" :description="'Password'" :is-secret="true" v-model="password"></BasicForm>
       <div class="flex justify-end">
-        <button
+        <BasicButton
             type="submit"
             class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold
             py-2 px-4 rounded"
         >
           Login!
-        </button>
+        </BasicButton>
       </div>
     </form>
     <div class="justify-center flex">
@@ -24,12 +24,14 @@
 </template>
 
 <script>
-import basicForm from './basicForm.vue'
+import BasicForm from './BasicForm.vue'
+import BasicButton from "./BasicButton.vue";
 
 export default {
   name: 'Login',
   components: {
-    basicForm
+    BasicButton,
+    BasicForm
   },
   data() {
     return {

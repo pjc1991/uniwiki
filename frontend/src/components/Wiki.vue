@@ -1,15 +1,18 @@
 <script>
 import {defineComponent} from 'vue'
 import {getCookie} from '../utils'
+import BasicButton from "./BasicButton.vue";
+import WikiSideMenu from "./WikiSideMenu.vue";
+import WikiCurrentPage from "./WikiCurrentPage.vue";
 
 export default defineComponent({
+  components: {WikiCurrentPage, WikiSideMenu, BasicButton},
   props: [
     'user'
   ],
   name: "Wiki",
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
   methods: {
     signOff() {
@@ -36,14 +39,20 @@ export default defineComponent({
 </script>
 
 <template>
-<div class="wiki-main">
-  yes, i am logged in as {{ user.username }}
-  <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      @click="signOff">
-    Sign off
-  </button>
-</div>
+  <div class="wiki-main h-full flex flex-col">
+      <div class="wiki-main-content flex flex-grow">
+        <WikiSideMenu></WikiSideMenu>
+        <WikiCurrentPage></WikiCurrentPage>
+      </div>
+      <div class="justify-start mt-5">
+        <p class="text-gray-700 text-base mb-4 truncate hover:underline font-serif">
+          Yes I'm logged in as {{ user.email }}
+        </p>
+      </div>
+      <div class="wiki-main-button flex justify-end">
+        <BasicButton @click="signOff" :description="'Sign off'"></BasicButton>
+      </div>
+    </div>
 </template>
 
 <style scoped>

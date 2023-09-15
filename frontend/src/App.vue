@@ -1,8 +1,9 @@
 <template>
-  <div class="bg-blue-600 flex items-center justify-center min-h-screen">
+  <div class="bg-blue-600 flex items-center justify-center h-screen">
+
     <div
         v-if="!loading"
-        class="bg-white text-black p-6 rounded-lg">
+        class="bg-white text-black p-6 rounded-lg shadow-lg w-2/3 h-3/4">
       <Login v-if="!loggedIn && !signup" @get-logged-in="loginCheck" @set-signup="setSignup"></Login>
       <Wiki v-if="loggedIn" :user="user" @get-logged-in="loginCheck"></Wiki>
       <Signup v-if="signup" @set-signup="setSignup"></Signup>
