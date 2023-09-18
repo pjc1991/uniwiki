@@ -77,7 +77,24 @@ class WikiDocumentViewSet(viewsets.ModelViewSet):
         return WikiDocument.objects.filter(universe__allowed_users=user)
 
     def perform_create(self, serializer):
-        universe = Universe.objects.get(id=self.request.data['universe'])
-        if not universe.allowed_users.filter(id=self.request.user.id).exists():
+        # get the current user
+        user = self.request.user
+
+        # check if the user is allowed to create a document in the universe
+        if not Universe.objects.filter(allowed_users=user, id=self.request.data['universe']).exists():
             raise Exception("You are not allowed to create a document in this universe")
-        serializer.save(owner=self.request.user, universe=universe)
+
+        # check if there is already a document with the same name in the universe
+        wiki_doc = WikiDocument.objects.filter(universe__allowed_users=user, name=self.request.data['name'])
+
+        # if more than one document with the same name exists, raise an exception
+        if wiki_doc.count() > 1:
+            raise Exception("There is already a document with this name in this universe")
+
+        # if there is exactly one document with the same name, update it
+        if wiki_doc.count() == 1:
+            wiki_doc.update(content=self.request.data['content'])
+
+        # if there is no document with the same name, create a new one
+        if wiki_doc.count() == 0:
+            serializer.save(owner=self.request.user)
