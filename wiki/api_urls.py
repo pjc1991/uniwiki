@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
+from . import views
 from .views import UniverseViewSet, WikiDocumentViewSet
 
 router = routers.DefaultRouter()
@@ -21,6 +22,7 @@ def api_root(request, fmt=None):
 
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('api/', api_root, name='api-root'),
+    path('', include(router.urls)),
+    path('', api_root, name='api-root'),
+    path('latest/', views.Latest.as_view(), name='latest'),
 ]

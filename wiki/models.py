@@ -53,6 +53,7 @@ class WikiDocument(BaseModel):
         SETTING = 'SETTING', 'Setting'
         ITEM = 'ITEM', 'Item'
         OTHER = 'OTHER', 'Other'
+        UNKNOWN = 'UNKNOWN', 'Unknown'
 
     # id as primary key
     id = models.AutoField(primary_key=True, help_text="Primary key")
