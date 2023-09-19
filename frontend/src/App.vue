@@ -11,7 +11,7 @@
       </Login>
 
       <Wiki
-        v-if="loggedIn"
+        v-if="loggedIn && !signup"
         :user="user"
         @get-logged-in="loginCheck"
         class="wiki-component">

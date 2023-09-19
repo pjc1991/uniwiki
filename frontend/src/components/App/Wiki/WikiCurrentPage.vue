@@ -96,7 +96,7 @@ function getTheDescription(content) {
 </script>
 
 <template>
-  <div class="flex flex-col w-3/4">
+  <div class="flex flex-col w-full">
     <textarea name="wiki-content" id="wiki-content" cols="30" rows="10" v-model="wiki_content"
         class="w-full h-full border border-gray-200 rounded-lg px-4 py-2 bg-gray-200 resize-none focus:outline-none font-serif overscroll-auto"
     ># New Page</textarea>

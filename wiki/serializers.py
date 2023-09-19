@@ -57,9 +57,11 @@ class WikiDocumentSerializer(serializers.ModelSerializer):
         # check if there is more than one document with the same name in this universe, if so, delete except the latest one
         if WikiDocument.objects.filter(name=validated_data['name'], universe=validated_data['universe']).count() > 1:
             # find the latest document
-            document = WikiDocument.objects.filter(name=validated_data['name'], universe=validated_data['universe']).last()
+            document = WikiDocument.objects.filter(name=validated_data['name'],
+                                                   universe=validated_data['universe']).last()
             # delete other documents
-            WikiDocument.objects.filter(name=validated_data['name'], universe=validated_data['universe']).exclude(id=document.id).delete()
+            WikiDocument.objects.filter(name=validated_data['name'], universe=validated_data['universe']).exclude(
+                id=document.id).delete()
             # update the latest document, only update description
             document.description = validated_data['description']
             return document
@@ -75,7 +77,15 @@ class WikiDocumentSerializer(serializers.ModelSerializer):
         # super create
         return super().create(validated_data)
 
+
 class UniverseSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), default=serializers.CurrentUserDefault())
+    allowed_users = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), many=True, default=serializers.CurrentUserDefault())
+
+    name = serializers.CharField(allow_blank=False, trim_whitespace=True)
+
     detail = serializers.HyperlinkedIdentityField(view_name='wiki:universe-detail', read_only=True)
 
     class Meta:

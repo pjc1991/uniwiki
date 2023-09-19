@@ -4,15 +4,20 @@ import {getCookie} from '../../utils.js'
 import BasicButton from "../BasicButton.vue";
 import WikiSideMenu from "./Wiki/WikiSideMenu.vue";
 import WikiCurrentPage from "./Wiki/WikiCurrentPage.vue";
+import MessageWindow from "../MessageWindow.vue";
+import WikiWindow from "./Wiki/WikiWindow.vue";
+import UniverseList from "./Wiki/UniverseList.vue";
 
 export default defineComponent({
-  components: {WikiCurrentPage, WikiSideMenu, BasicButton},
+  components: {UniverseList, WikiWindow, MessageWindow, WikiCurrentPage, WikiSideMenu, BasicButton},
   props: [
-    'user'
+    'user',
   ],
   name: "Wiki",
   data() {
-    return {}
+    return {
+      universeSelected: false,
+    }
   },
   methods: {
     signOff() {
@@ -39,27 +44,18 @@ export default defineComponent({
 </script>
 
 <template>
-<div class="wiki-main h-full flex flex-col">
-  <div class="wiki-main-content flex flex-grow">
-    <WikiSideMenu class="wiki-side-menu-component"></WikiSideMenu>
-    <WikiCurrentPage class="wiki-current-page-component"></WikiCurrentPage>
+  <div class="wiki-main h-full flex flex-col">
+    <UniverseList
+        v-if="!universeSelected"
+        :user="user"
+        class="universe-list-component">
+    </UniverseList>
+    <WikiWindow
+        v-if="universeSelected"
+        :user="user"
+        class="wiki-window-component">
+    </WikiWindow>
   </div>
-
-  <div class="flex flex-col items-start mt-5">
-    <p class="text-gray-700 text-base mb-4 truncate hover:underline font-serif">
-      Yes I'm logged in as {{ user.email }}
-    </p>
-  </div>
-
-  <div class="wiki-main-button flex justify-end mt-auto">
-    <BasicButton
-      @click="signOff"
-      :description="'Sign off'"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-    >
-    </BasicButton>
-  </div>
-</div>
 
 </template>
 
