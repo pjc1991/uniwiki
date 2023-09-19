@@ -1,7 +1,7 @@
 <script>
 import {defineComponent} from 'vue'
 import WikiListItem from "./WikiListItem.vue";
-import BasicButton from "./BasicButton.vue";
+import BasicButton from "../../BasicButton.vue";
 
 export default defineComponent({
   name: "WikiSideMenu",

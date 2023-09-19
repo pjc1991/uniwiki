@@ -1,9 +1,9 @@
 <script>
 import {defineComponent} from 'vue'
-import {getCookie} from '../utils'
-import BasicButton from "./BasicButton.vue";
-import WikiSideMenu from "./WikiSideMenu.vue";
-import WikiCurrentPage from "./WikiCurrentPage.vue";
+import {getCookie} from '../../utils.js'
+import BasicButton from "../BasicButton.vue";
+import WikiSideMenu from "./Wiki/WikiSideMenu.vue";
+import WikiCurrentPage from "./Wiki/WikiCurrentPage.vue";
 
 export default defineComponent({
   components: {WikiCurrentPage, WikiSideMenu, BasicButton},

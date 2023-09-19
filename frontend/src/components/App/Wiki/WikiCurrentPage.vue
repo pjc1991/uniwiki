@@ -1,6 +1,6 @@
 <script>
 import {defineComponent} from 'vue'
-import {getCookie} from '../utils'
+import {getCookie} from '../../../utils.js'
 
 export default defineComponent({
   name: "WikiCurrentPage",

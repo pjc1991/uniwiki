@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import Login from './components/Login.vue'
-import Wiki from "./components/Wiki.vue";
-import Signup from "./components/Signup.vue";
+import Login from './components/App/Login.vue'
+import Wiki from "./components/App/Wiki.vue";
+import Signup from "./components/App/Signup.vue";
 export default {
   name: 'App',
   components: {

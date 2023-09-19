@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import BasicForm from './BasicForm.vue'
-import BasicButton from "./BasicButton.vue";
+import BasicForm from '../BasicForm.vue'
+import BasicButton from "../BasicButton.vue";
 
 export default {
   name: 'Login',
