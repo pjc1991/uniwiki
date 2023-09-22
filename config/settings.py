@@ -31,7 +31,10 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '192.168.50.18',
+]
 
 
 # Application definition
@@ -198,3 +201,9 @@ REST_AUTH = {
 
 JWT_AUTH_COOKIE = 'jwt'
 JWT_AUTH_REFRESH_COOKIE = 'refresh'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
