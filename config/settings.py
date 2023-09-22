@@ -159,7 +159,7 @@ DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'frontend' / 'static' / 'dist'
 
 DJANGO_VITE_DEV_MODE = IS_DEV
 
-STATIC_ROOT = BASE_DIR / "collected_static"
+STATIC_ROOT = BASE_DIR / "static"
 
 
 STATICFILES_DIRS = [
