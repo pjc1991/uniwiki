@@ -29,22 +29,36 @@ load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+IS_DEV = os.getenv('IS_DEV', 'True').lower() == 'true'
+DEBUG = IS_DEV
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     '192.168.50.18',
+    '192.168.50.18',
+    '121.130.202.58',
+    '192.168.50.165',
+
 ]
 
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = []
+
+if not IS_DEV:
+    INSTALLED_APPS += [
+        'daphne',
+    ]
+
+INSTALLED_APPS += [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # 'daphne', # only for production
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -60,6 +74,9 @@ INSTALLED_APPS = [
     'django_vite'
 ]
 
+
+ASGI_APPLICATION = 'config.asgi.application'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,8 +85,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'common.middleware.MoveJWTCookieIntoTheBody',
-    'common.middleware.MoveJWTRefreshCookieIntoTheBody',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -142,7 +157,7 @@ STATIC_URL = '/static/'
 
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'frontend' / 'static' / 'dist'
 
-DJANGO_VITE_DEV_MODE = DEBUG
+DJANGO_VITE_DEV_MODE = IS_DEV
 
 STATIC_ROOT = BASE_DIR / "collected_static"
 
@@ -201,9 +216,9 @@ REST_AUTH = {
 
 JWT_AUTH_COOKIE = 'jwt'
 JWT_AUTH_REFRESH_COOKIE = 'refresh'
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = not IS_DEV
+CSRF_COOKIE_SECURE = not IS_DEV
+SECURE_SSL_REDIRECT = not IS_DEV
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
